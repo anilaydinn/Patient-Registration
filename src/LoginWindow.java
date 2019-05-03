@@ -12,7 +12,7 @@ public class LoginWindow extends JFrame {
 	private JLabel pwLabel;
 	private JLabel usernameLabel;
 	private JTextField userID;
-	private JTextField userPW;
+	private JPasswordField userPW;
 	private JButton loginButton;
 	private final int WINDOW_WIDTH = 300;
 	private final int WINDOW_HEIGHT = 125;
@@ -30,7 +30,7 @@ public class LoginWindow extends JFrame {
 		usernameLabel = new JLabel("Username: ");
 		userID = new JTextField();
 		pwLabel = new JLabel("Password");
-		userPW = new JTextField();
+		userPW = new JPasswordField();
 		loginButton = new JButton("Login");
 		
 		add(usernameLabel);
