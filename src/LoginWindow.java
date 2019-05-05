@@ -78,4 +78,5 @@ public class LoginWindow extends JFrame {
 		
 		new LoginWindow();
 	}
+	
 }

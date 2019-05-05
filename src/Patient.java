@@ -25,6 +25,17 @@ public class Patient {
 		
 	}
 	
+	public Patient() {
+		
+		this.patientName = patientName;
+		this.patientSurname = patientSurname;
+		this.diseaseName = diseaseName;
+		this.patientAge = patientAge;
+		this.patientAllergies = patientAllergies;
+		this.companionName = companionName;
+		this.tcId = tcId;
+	}
+	
 	// GET and SET Methods of patientName field.
 	
 	public void setPatientName(String patientName) {

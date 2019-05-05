@@ -68,7 +68,9 @@ public class MainWindow extends JFrame {
 		
 		public void actionPerformed(ActionEvent e) {
 			
-			
+			RegisterWindow registerWindow = new RegisterWindow();
+			registerWindow.setVisible(true);
+			setVisible(false);
 		}
 	}
 	
