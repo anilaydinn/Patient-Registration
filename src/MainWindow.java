@@ -9,12 +9,11 @@ import java.awt.event.ActionListener;
 
 public class MainWindow extends JFrame {
 	
-	JLabel messageLabel;
 	JButton buttonRegister;
 	JButton buttonDelete;
 	JButton buttonAppend;
-	JPanel panel;
-	private final int WINDOW_WIDTH = 300;			//Window width
+	JButton showAllPatientButton;
+	private final int WINDOW_WIDTH = 400;			//Window width
 	private final int WINDOW_HEIGHT = 125;			//Window height
 	
 	/*
@@ -32,27 +31,27 @@ public class MainWindow extends JFrame {
 		//Specify an action for close button.
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
-		//Create a label.
-		messageLabel = new JLabel("Click a button to a select operation.");
+		setLayout(new GridLayout(2, 2));
+		
 		
 		//Create three buttons.
 		buttonRegister = new JButton("Patient Register");
 		buttonAppend = new JButton("Patient Append");
 		buttonDelete = new JButton("Patient Delete");
+		showAllPatientButton = new JButton("Show All Patient");
 		
 		//Register an event listener with all 3 buttons.
 		buttonRegister.addActionListener(new ButtonRegisterListener());
 		buttonAppend.addActionListener(new ButtonAppendListener());
 		buttonDelete.addActionListener(new ButtonDeleteListener());
+		showAllPatientButton.addActionListener(new ShowAllPatientButtonListener());
 		
-		//Create a panel.
-		panel = new JPanel();
-		panel.add(messageLabel);
-		panel.add(buttonRegister);
-		panel.add(buttonAppend);
-		panel.add(buttonDelete);
+		add(buttonRegister);
+		add(buttonAppend);
+		add(showAllPatientButton);
+		add(buttonDelete);
 		
-		add(panel);
+		
 		
 		//Start window center of the screen.
 		setLocationRelativeTo(null);
@@ -80,13 +79,25 @@ public class MainWindow extends JFrame {
 		
 		public void actionPerformed(ActionEvent e) {
 			
-			
+			AppendWindow appendWindow = new AppendWindow();
+			appendWindow.setVisible(true);
+			setVisible(false);
 		}
 	}
 	
 	//Click event for delete button.
 	
 	private class ButtonDeleteListener implements ActionListener{
+		
+		public void actionPerformed(ActionEvent e) {
+			
+			DeleteWindow deleteWindow = new DeleteWindow();
+			deleteWindow.setVisible(true);
+			setVisible(false);
+		}
+	}
+	
+	private class ShowAllPatientButtonListener implements ActionListener{
 		
 		public void actionPerformed(ActionEvent e) {
 			

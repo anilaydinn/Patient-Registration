@@ -1,6 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.io.*;
 
 /*
  	This window is register window.
@@ -24,6 +25,7 @@ public class RegisterWindow extends JFrame {
 	private JTextField tcIdTextField;
 	private JButton clearButton;
 	private JButton registerButton;
+	private JButton backButton;
 	private final int WINDOW_WIDTH = 500;
 	private final int WINDOW_HEIGHT = 300;
 	
@@ -35,7 +37,7 @@ public class RegisterWindow extends JFrame {
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
-		setLayout(new GridLayout(8, 2));
+		setLayout(new GridLayout(9, 2));
 		
 		patientNameLabel = new JLabel("Name: ");
 		patientNameTextField = new JTextField();
@@ -53,9 +55,11 @@ public class RegisterWindow extends JFrame {
 		tcIdTextField = new JTextField();
 		clearButton = new JButton("Clear");
 		registerButton = new JButton("Save");
+		backButton = new JButton("Back");
 		
 		registerButton.addActionListener(new RegisterButtonListener());
 		clearButton.addActionListener(new ClearButtonListener());
+		backButton.addActionListener(new BackButtonListener());
 		
 		add(patientNameLabel);
 		add(patientNameTextField);
@@ -73,15 +77,27 @@ public class RegisterWindow extends JFrame {
 		add(tcIdTextField);
 		add(clearButton);
 		add(registerButton);
+		add(backButton);
 		
 		setLocationRelativeTo(null);
 		
 		setVisible(true);
 	}
 	
-	private class RegisterButtonListener implements ActionListener{
+	private class RegisterButtonListener implements ActionListener {
 		
-		public void actionPerformed(ActionEvent e) {
+		public void actionPerformed(ActionEvent e){
+			
+			Patient patient = new Patient();
+			
+			
+			patient.setPatientName(patientNameTextField.getText());
+			patient.setPatientSurname(patientSurnameTextField.getText());
+			patient.setDiseaseName(diseaseNameTextField.getText());
+			patient.setPatientAge(Integer.parseInt(patientAgeTextField.getText()));
+			patient.setPatientAllergies(patientAllergiesTextField.getText());
+			patient.setCompanionName(companionNameTextField.getText());
+			patient.setTcId(tcIdTextField.getText());
 			
 			
 		}
@@ -99,6 +115,34 @@ public class RegisterWindow extends JFrame {
 			companionNameTextField.setText("");
 			tcIdTextField.setText("");
 		}
+	}
+	
+	private class BackButtonListener implements ActionListener{
+		
+		public void actionPerformed(ActionEvent e) {
+			
+			MainWindow main1 = new MainWindow();
+			main1.setVisible(true);
+			setVisible(false);
+		}
+	}
+	
+	public void writeFile(Patient patient) throws IOException {
+		
+		boolean haveFile = false;
+		
+		if(haveFile == false) {
+			
+			PrintWriter printPatientFile = new PrintWriter("Patients.txt");
+			
+			printPatientFile.println("Name: " + patient.getPatientName() + " Surname: " + patient.getPatientSurname() + " Disease Name: " + patient.getDiseaseName() + " Patient Age: " + patient.getPatientAge() + " Patient Allergies: " + patient.getPatientAllergies() + " Companion Name: " + patient.getCompanionName() + " TC: " + patient.getTcId() );
+			
+			printPatientFile.close();
+			
+			haveFile = true;
+		}
+		
+		
 	}
 	
 }
