@@ -1,5 +1,6 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.desktop.PrintFilesEvent;
 import java.awt.event.*;
 import java.io.*;
 
@@ -98,6 +99,19 @@ public class RegisterWindow extends JFrame {
 			patient.setPatientAllergies(patientAllergiesTextField.getText());
 			patient.setCompanionName(companionNameTextField.getText());
 			patient.setTcId(tcIdTextField.getText());
+			
+			try {
+				
+				PrintWriter printFile = new PrintWriter("Patients.txt");
+				
+				printFile.println(patient.getPatientName());
+				
+				printFile.close();
+			}catch(IOException ex) {
+				System.out.println("IO Exception.");
+			}
+			
+			
 			
 			
 		}
