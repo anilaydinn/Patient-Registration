@@ -104,14 +104,5 @@ public class MainWindow extends JFrame {
 			
 		}
 	}
-	
-	
-	
-	/*
-	//main method
-	public static void main(String[] args) {
-		
-		new MainWindow();
-	}
-	*/
+
 }

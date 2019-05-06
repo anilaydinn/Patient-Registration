@@ -3,6 +3,7 @@ public class Patient {
 
 	private String patientName;
 	private String patientSurname;
+	private String patientGender;
 	private String diseaseName;
 	private int patientAge;
 	private String patientAllergies;
@@ -13,7 +14,7 @@ public class Patient {
 	 	Constructor
 	 */
 	
-	public Patient(String patientName, String patientSurname, String diseaseName, int patientAge, String patientAllergies, String companionName, String tcId) {
+	public Patient(String patientName, String patientSurname, String diseaseName, int patientAge, String patientAllergies, String companionName, String tcId, String patientGender) {
 		
 		this.patientName = patientName;
 		this.patientSurname = patientSurname;
@@ -22,6 +23,7 @@ public class Patient {
 		this.patientAllergies = patientAllergies;
 		this.companionName = companionName;
 		this.tcId = tcId;
+		this.patientGender = patientGender;
 		
 	}
 	
@@ -34,6 +36,7 @@ public class Patient {
 		this.patientAllergies = patientAllergies;
 		this.companionName = companionName;
 		this.tcId = tcId;
+		this.patientGender = patientGender;
 	}
 	
 	// GET and SET Methods of patientName field.
@@ -120,5 +123,17 @@ public class Patient {
 	public String getTcId() {
 		
 		return tcId;
+	}
+	
+	//GET and SET Methods of patientGender field.
+	
+	public void setPatientGender(String patientGender) {
+		
+		this.patientGender = patientGender;
+	}
+	
+	public String getPatientGender() {
+		
+		return patientGender;
 	}
 }

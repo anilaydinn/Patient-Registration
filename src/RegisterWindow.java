@@ -13,6 +13,9 @@ public class RegisterWindow extends JFrame {
 	private JLabel patientNameLabel;
 	private JLabel patientSurnameLabel;
 	private JLabel diseaseNameLabel;
+	private JRadioButton patientGenderRadioM;
+	private JRadioButton patientGenderRadioF;
+	private ButtonGroup bg;
 	private JLabel patientAgeLabel;
 	private JLabel patientAllergiesLabel;
 	private JLabel companionNameLabel;
@@ -38,7 +41,7 @@ public class RegisterWindow extends JFrame {
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
-		setLayout(new GridLayout(9, 2));
+		setLayout(new GridLayout(10, 2));
 		
 		patientNameLabel = new JLabel("Name: ");
 		patientNameTextField = new JTextField();
@@ -48,6 +51,9 @@ public class RegisterWindow extends JFrame {
 		diseaseNameTextField = new JTextField();
 		patientAgeLabel = new JLabel("Patient Age: ");
 		patientAgeTextField = new JTextField();
+		patientGenderRadioM = new JRadioButton("Male");
+		patientGenderRadioF = new JRadioButton("Female");
+		bg = new ButtonGroup();
 		patientAllergiesLabel = new JLabel("Allergies of the Patient");
 		patientAllergiesTextField = new JTextField();
 		companionNameLabel = new JLabel("Companion Name: ");
@@ -61,6 +67,10 @@ public class RegisterWindow extends JFrame {
 		registerButton.addActionListener(new RegisterButtonListener());
 		clearButton.addActionListener(new ClearButtonListener());
 		backButton.addActionListener(new BackButtonListener());
+		
+		
+		bg.add(patientGenderRadioM);
+		bg.add(patientGenderRadioF);
 		
 		add(patientNameLabel);
 		add(patientNameTextField);
@@ -76,6 +86,8 @@ public class RegisterWindow extends JFrame {
 		add(companionNameTextField);
 		add(tcIdLabel);
 		add(tcIdTextField);
+		add(patientGenderRadioM);
+		add(patientGenderRadioF);
 		add(clearButton);
 		add(registerButton);
 		add(backButton);
@@ -100,19 +112,22 @@ public class RegisterWindow extends JFrame {
 			patient.setCompanionName(companionNameTextField.getText());
 			patient.setTcId(tcIdTextField.getText());
 			
-			try {
+			if(patientGenderRadioF.isSelected()) {
 				
-				PrintWriter printFile = new PrintWriter("Patients.txt");
+				patient.setPatientGender("Female");
+			
+			}
+			else if(patientGenderRadioM.isSelected()) {
 				
-				printFile.println(patient.getPatientName());
-				
-				printFile.close();
-			}catch(IOException ex) {
-				System.out.println("IO Exception.");
+				patient.setPatientGender("Male");
 			}
 			
-			
-			
+			try {
+				write(patient);
+			} catch (IOException e1) {
+					
+				System.out.println(e1);
+			}
 			
 		}
 	}
@@ -128,6 +143,7 @@ public class RegisterWindow extends JFrame {
 			patientAllergiesTextField.setText("");
 			companionNameTextField.setText("");
 			tcIdTextField.setText("");
+			
 		}
 	}
 	
@@ -141,22 +157,12 @@ public class RegisterWindow extends JFrame {
 		}
 	}
 	
-	public void writeFile(Patient patient) throws IOException {
+	public void write(Patient p1) throws IOException {
 		
-		boolean haveFile = false;
 		
-		if(haveFile == false) {
-			
-			PrintWriter printPatientFile = new PrintWriter("Patients.txt");
-			
-			printPatientFile.println("Name: " + patient.getPatientName() + " Surname: " + patient.getPatientSurname() + " Disease Name: " + patient.getDiseaseName() + " Patient Age: " + patient.getPatientAge() + " Patient Allergies: " + patient.getPatientAllergies() + " Companion Name: " + patient.getCompanionName() + " TC: " + patient.getTcId() );
-			
-			printPatientFile.close();
-			
-			haveFile = true;
-		}
-		
+		PrintWriter out = new PrintWriter(new FileWriter("Patients.txt", true));
+		out.append("Name: " + p1.getPatientName() + " Surname: " + p1.getPatientSurname() + " Disease Name: " + p1.getDiseaseName() + " Patient Age: " + p1.getPatientAge() + " Patient Allergies : " + p1.getPatientAllergies() + " Companion Name: " + p1.getCompanionName() + " TC: " + p1.getTcId() + " Gender: " + p1.getPatientGender() + "\n");
+		out.close();
 		
 	}
-	
 }
