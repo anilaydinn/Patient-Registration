@@ -2,6 +2,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.*;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 
@@ -12,16 +13,11 @@ public class ShowAllPatientWindow extends JFrame{
 	private JButton patientBackButton;
 	private JButton patientShowButton;
 	private JLabel patientLabel;
-	private JPanel panel1;
-	private JPanel panel2;
-	private JPanel panel3;
-	private JPanel panel4;
-	private JPanel panel5;
 	private File file = new File("//home//anil//workspace//PatientRegistration//Patients.txt");
-	private final int WINDOW_WIDTH = 800;
-	private final int WINDOW_HEIGTH = 600;
+	private final int WINDOW_WIDTH = 1280;
+	private final int WINDOW_HEIGTH = 720;
+	private ArrayList<String> patientArrayList = new ArrayList<String>();
 	
-	String[] patients = {};
 	
 	public ShowAllPatientWindow() {
 		
@@ -33,26 +29,20 @@ public class ShowAllPatientWindow extends JFrame{
 		
 		setLayout(new BorderLayout());
 		
-		panel1 = new JPanel();
-		panel2 = new JPanel();
-		panel3 = new JPanel();
-		panel4 = new JPanel();
-		panel5 = new JPanel();
+		
+		
 		
 		patientLabel = new JLabel("Patient List");
-		patientList = new JList(patients);
+		patientList = new JList(patientArrayList.toArray());
 		patientShowButton = new JButton("Show");
 		patientBackButton = new JButton("Back");
 		
-		panel1.add(patientLabel);
-		panel2.add(patientBackButton);
-		panel3.add(patientShowButton);
-		panel5.add(patientList);
 		
-		add(panel1, BorderLayout.NORTH);
-		add(panel5, BorderLayout.CENTER);
-		add(panel3, BorderLayout.EAST);
-		add(panel2, BorderLayout.SOUTH);
+		add(patientLabel, BorderLayout.NORTH);
+		add(patientShowButton, BorderLayout.EAST);
+		add(patientList, BorderLayout.CENTER);
+		add(patientBackButton, BorderLayout.SOUTH);
+		
 	
 	
 		patientBackButton.addActionListener(new BackButtonListener());
@@ -71,7 +61,6 @@ public class ShowAllPatientWindow extends JFrame{
 			MainWindow mainWindow = new MainWindow();
 			mainWindow.setVisible(true);
 			setVisible(false);
-
 		}
 	}
 	
@@ -79,24 +68,30 @@ public class ShowAllPatientWindow extends JFrame{
 		
 		public void actionPerformed(ActionEvent e) {
 			
-			String str = "";
+			DefaultListModel DLM = new DefaultListModel();
+			String str;
 			int counter = 0;
-			try {
-				
-				Scanner scanFile = new Scanner(file);
 			
+			try {
+				Scanner scanFile = new Scanner(file);
+				
 				while(scanFile.hasNext()) {
 					
 					str = scanFile.nextLine();
-					patients[counter] = str;
+					patientArrayList.add(str);
+					DLM.addElement(patientArrayList.get(counter));
 					counter++;
 				}
-				scanFile.close();
-			}
-			catch(IOException e1) {
 				
-				System.out.println(e1);
+				patientList.setModel(DLM);
+				
+				scanFile.close();
+				
+			} catch (IOException e2) {
+				
 			}
+			
+			
 			
 			
 		

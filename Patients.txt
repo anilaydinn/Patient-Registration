@@ -1,0 +1,2 @@
+Name: Anıl Surname: Aydın Disease Name: qqq Patient Age: 69 Patient Allergies: Herşey Companion Name: Hazar TC: 24688682600 Gender: Male
+Name: q Surname: q Disease Name: q Patient Age: 56 Patient Allergies: q Companion Name: q TC: 246981651 Gender: Female

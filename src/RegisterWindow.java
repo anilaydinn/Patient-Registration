@@ -31,7 +31,7 @@ public class RegisterWindow extends JFrame {
 	private JButton clearButton;
 	private JButton registerButton;
 	private JButton backButton;
-	private ArrayList<String> patientArrayList = new ArrayList<String>();
+	public ArrayList<String> patientArrayList = new ArrayList<String>();
 	private final int WINDOW_WIDTH = 500;
 	private final int WINDOW_HEIGHT = 300;
 	
