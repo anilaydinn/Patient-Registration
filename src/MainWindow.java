@@ -101,7 +101,9 @@ public class MainWindow extends JFrame {
 		
 		public void actionPerformed(ActionEvent e) {
 			
-			
+			ShowAllPatientWindow showWindow = new ShowAllPatientWindow();
+			showWindow.setVisible(true);
+			setVisible(false);
 		}
 	}
 

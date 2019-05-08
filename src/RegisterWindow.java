@@ -3,6 +3,7 @@ import java.awt.*;
 import java.awt.desktop.PrintFilesEvent;
 import java.awt.event.*;
 import java.io.*;
+import java.util.ArrayList;
 
 /*
  	This window is register window.
@@ -30,6 +31,7 @@ public class RegisterWindow extends JFrame {
 	private JButton clearButton;
 	private JButton registerButton;
 	private JButton backButton;
+	private ArrayList<String> patientArrayList = new ArrayList<String>();
 	private final int WINDOW_WIDTH = 500;
 	private final int WINDOW_HEIGHT = 300;
 	
@@ -122,6 +124,9 @@ public class RegisterWindow extends JFrame {
 				patient.setPatientGender("Male");
 			}
 			
+			patientArrayList.add("Name: " + patient.getPatientName() + " Surname: " + patient.getPatientSurname() + " Disease Name: " + patient.getDiseaseName() + " Patient Age: " + patient.getPatientAge() + " Patient Allergies: " + patient.getPatientAllergies() + " Companion Name: " + patient.getCompanionName() + " TC: " + patient.getTcId() + " Gender: " + patient.getPatientGender() + "\n");
+
+			System.out.println(patientArrayList.size());
 			try {
 				write(patient);
 			} catch (IOException e1) {
@@ -159,10 +164,12 @@ public class RegisterWindow extends JFrame {
 	
 	public void write(Patient p1) throws IOException {
 		
+		int counter = 0;
 		
 		PrintWriter out = new PrintWriter(new FileWriter("Patients.txt", true));
-		out.append("Name: " + p1.getPatientName() + " Surname: " + p1.getPatientSurname() + " Disease Name: " + p1.getDiseaseName() + " Patient Age: " + p1.getPatientAge() + " Patient Allergies : " + p1.getPatientAllergies() + " Companion Name: " + p1.getCompanionName() + " TC: " + p1.getTcId() + " Gender: " + p1.getPatientGender() + "\n");
+		out.append(patientArrayList.get(counter));
 		out.close();
+		counter++;
 		
 	}
 }
