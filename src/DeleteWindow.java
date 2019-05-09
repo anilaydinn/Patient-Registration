@@ -1,6 +1,15 @@
 import javax.swing.*;
+
+
+
 import java.awt.*;
 import java.awt.event.*;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.Scanner;
 
 /*
  	Delete Window.
@@ -10,8 +19,9 @@ public class DeleteWindow extends JFrame {
 
 	private JLabel messageLabel;
 	private JButton deleteAllButton;
-	private JButton deleteByTCButton;
 	private JButton backButton;
+	private File file = new File("//home//anil//workspace//PatientRegistration//Patients.txt");
+	private ArrayList<String> patientArrayList = new ArrayList<String>();
 	private final int WINDOW_WIDTH = 300;
 	private final int WINDOW_HEIGHT = 125;
 	
@@ -23,20 +33,17 @@ public class DeleteWindow extends JFrame {
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
-		setLayout(new GridLayout(4, 1));
+		setLayout(new GridLayout(3, 1));
 		
 		messageLabel = new JLabel("Choose an operations.");
 		deleteAllButton = new JButton("Delete All.");
-		deleteByTCButton = new JButton("Delete by TC.");
 		backButton = new JButton("Back");
 		
 		deleteAllButton.addActionListener(new DeleteAllButtonListener());
-		deleteByTCButton.addActionListener(new DeleteByTcButtonListener());
 		backButton.addActionListener(new BackButtonListener());
 		
 		add(messageLabel);
 		add(deleteAllButton);
-		add(deleteByTCButton);
 		add(backButton);
 		
 		setLocationRelativeTo(null);
@@ -49,17 +56,10 @@ public class DeleteWindow extends JFrame {
 		
 		public void actionPerformed(ActionEvent e) {
 			
-			
+			file.delete();
 		}
 	}
 	
-	private class DeleteByTcButtonListener implements ActionListener{
-		
-		public void actionPerformed(ActionEvent e) {
-			
-			
-		}
-	}
 	
 	private class BackButtonListener implements ActionListener{
 		
@@ -70,4 +70,16 @@ public class DeleteWindow extends JFrame {
 			setVisible(false);
 		}
 	}
+	
+	public void write(ArrayList<String> arr) throws IOException {
+		
+		int counter = 0;
+		
+		PrintWriter out = new PrintWriter(new FileWriter("Patients.txt", true));
+		out.append(arr.get(counter));
+		out.close();
+		counter++;
+		
+	}
+	
 }

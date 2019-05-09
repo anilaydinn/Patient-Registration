@@ -143,7 +143,6 @@ public class AppendWindow extends JFrame {
 			appendPatientSurnameTextField.setText("");
 			appendDiseaseNameTextField.setText("");
 			appendPatientAgeTextField.setText("");
-			appendPatientAgeTextField.setText("");
 			appendPatientAllergiesTextField.setText("");
 			appendCompanionNameTextField.setText("");
 			appendTCIdTextField.setText("");
