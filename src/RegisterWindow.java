@@ -31,7 +31,7 @@ public class RegisterWindow extends JFrame {
 	private JButton clearButton;
 	private JButton registerButton;
 	private JButton backButton;
-	public ArrayList<String> patientArrayList = new ArrayList<String>();
+	private ArrayList<String> patientArrayList = new ArrayList<String>();
 	private final int WINDOW_WIDTH = 500;
 	private final int WINDOW_HEIGHT = 300;
 	
@@ -126,7 +126,7 @@ public class RegisterWindow extends JFrame {
 			
 			patientArrayList.add("Name: " + patient.getPatientName() + " Surname: " + patient.getPatientSurname() + " Disease Name: " + patient.getDiseaseName() + " Patient Age: " + patient.getPatientAge() + " Patient Allergies: " + patient.getPatientAllergies() + " Companion Name: " + patient.getCompanionName() + " TC: " + patient.getTcId() + " Gender: " + patient.getPatientGender() + "\n");
 
-			System.out.println(patientArrayList.size());
+			
 			try {
 				write(patient);
 			} catch (IOException e1) {
